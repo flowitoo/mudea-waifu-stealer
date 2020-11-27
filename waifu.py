@@ -10,21 +10,21 @@ token = "token" # <--- Enter your token here
 
 @bot.event
 async def on_ready():
-    global mudeaID
-    global mudeamaidID
+    global mudaeID
+    global mudaemaidID
     global yourID
-    global adria
-    global brotherz
-    global axis
+    global server1
+    global server2
+    global server3
     global minKakera
     
     minKakera = int(400) # <--- Minimum kakera for waifu to have in order to claim it.
-    mudeaID = 432610292342587392
-    mudeamaidID = 509695019767037953
+    mudaeID = 432610292342587392
+    mudaemaidID = 509695019767037953
     yourID = 745736015146123348
-    adria = bot.get_channel(778010068046184459)
-    brotherz = bot.get_channel(780115909788434443)
-    axis = bot.get_channel(656289494743646237)
+    server1 = bot.get_channel(123456789123456789) # <--- channel id for commands/mudae channel in a server
+    server2 = bot.get_channel(123456789123456789) # <--- channel id for commands/mudae channel in a server
+    server3 = bot.get_channel(123456789123456789) # <--- channel id for commands/mudae channel in a server
 
     print("I'm online!")
     await start_tasks() # <--- You can comment this line if you do not want to claim daily kakera or roll waifus (only waifu stealing)
@@ -37,7 +37,7 @@ async def start_tasks():
 @bot.event
 async def on_reaction_add(reaction, user):
     embeds = reaction.message.embeds
-    if reaction.message.author.id == mudeaID or reaction.message.author.id == mudeamaidID:
+    if reaction.message.author.id == mudaeID or reaction.message.author.id == mudaemaidID:
             for embed in embeds:
                 a = embed.to_dict()
                 b = json.dumps(a)
@@ -94,13 +94,13 @@ async def roll_waifus():
         if i == rolls:
             break
         i += 1
-        await adria.send('$w')
+        await server1.send('$w')
         await asyncio.sleep(2)
         
-        await brotherz.send('$w')
+        await server2.send('$w')
         await asyncio.sleep(2)
         
-        await axis.send('$w')
+        await server3.send('$w')
         await asyncio.sleep(5)
         # You can add more servers there. Check lines 25 - 28
     print('  out of rolls.')
@@ -109,9 +109,9 @@ async def roll_waifus():
 async def daily_kakera():
     print(' claiming daily kakera.')
     try:
-        await adria.send('$dk')
-        await brotherz.send('$dk')
-        await axis.send('$dk')
+        await server1.send('$dk')
+        await server2.send('$dk')
+        await server3.send('$dk')
         # You can add more servers there. Check lines 25 - 28
     except:
         print('   [!] Looks like I do not have permissions to send a message (daily_kakera function)')
